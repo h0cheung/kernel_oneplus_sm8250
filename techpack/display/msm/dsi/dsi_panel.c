@@ -4926,6 +4926,7 @@ error:
 	return rc;
 }
 
+extern int oneplus_panel_status;
 int dsi_panel_set_lp1(struct dsi_panel *panel)
 {
 	int rc = 0;
@@ -4954,6 +4955,8 @@ int dsi_panel_set_lp1(struct dsi_panel *panel)
 	if (rc)
 		DSI_ERR("[%s] failed to send DSI_CMD_SET_LP1 cmd, rc=%d\n",
 		       panel->name, rc);
+
+	oneplus_panel_status = 3; // DISPLAY_POWER_DOZE
 exit:
 	mutex_unlock(&panel->panel_lock);
 	return rc;
@@ -4976,6 +4979,8 @@ int dsi_panel_set_lp2(struct dsi_panel *panel)
 	if (rc)
 		DSI_ERR("[%s] failed to send DSI_CMD_SET_LP2 cmd, rc=%d\n",
 		       panel->name, rc);
+
+	oneplus_panel_status = 4; // DISPLAY_POWER_DOZE_SUSPEND
 exit:
 	mutex_unlock(&panel->panel_lock);
 	return rc;
@@ -5007,6 +5012,8 @@ int dsi_panel_set_nolp(struct dsi_panel *panel)
 	if (rc)
 		DSI_ERR("[%s] failed to send DSI_CMD_SET_NOLP cmd, rc=%d\n",
 		       panel->name, rc);
+
+	oneplus_panel_status = 2; // DISPLAY_POWER_ON
 exit:
 	mutex_unlock(&panel->panel_lock);
 	return rc;
@@ -5396,6 +5403,8 @@ int dsi_panel_enable(struct dsi_panel *panel)
 	}
 	DSI_ERR("start\n");
 
+	oneplus_panel_status = 2; // DISPLAY_POWER_ON
+
 	mutex_lock(&panel->panel_lock);
 
 	if (panel->aod_mode == 2) {
@@ -5579,6 +5588,7 @@ int dsi_panel_disable(struct dsi_panel *panel)
 	}
 	panel->panel_initialized = false;
 	panel->power_mode = SDE_MODE_DPMS_OFF;
+	oneplus_panel_status = 0; // DISPLAY_POWER_OFF
 
 	mutex_unlock(&panel->panel_lock);
 	DSI_ERR("end\n");
