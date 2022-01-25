@@ -1034,6 +1034,7 @@ static int dsi_panel_update_backlight(struct dsi_panel *panel,
 		return -EINVAL;
 	}
 
+    op_dimlayer_bl_alpha = panel->bl_config.bl_max_level;
 	dsi = &panel->mipi_device;
 	mode = panel->cur_mode;
 

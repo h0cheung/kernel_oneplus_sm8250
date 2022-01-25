@@ -5109,6 +5109,8 @@ static int sde_crtc_onscreenfinger_atomic_check(struct sde_crtc_state *cstate,
 		return 0;
     }
 
+    op_dimlayer_bl_alpha = display->panel->bl_config.bl_max_level;
+
 	if (display->panel->aod_status == 1) {
 		if (oneplus_dim_status == 2 && oneplus_onscreenfp_status == 1) {
 			fp_mode = 1;
