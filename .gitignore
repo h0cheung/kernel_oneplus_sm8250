@@ -136,12 +136,6 @@ all.config
 # fetched Android config fragments
 kernel/configs/android-*.cfg
 
-# vendor device tree directories
-arch/arm64/boot/dts/vendor/
-
-# Tech package directories
-techpack/
-
 #
 # Ignoring Android.bp link file
 #
@@ -149,3 +143,9 @@ Android.bp
 
 # Output directory
 out/
+
+/IllusionX-*.zip
+/AnyKernel3/Image
+/AnyKernel3/Image.gz
+/AnyKernel3/dtbo.img
+/AnyKernel3/dtb.img
